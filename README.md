@@ -16,10 +16,10 @@ Accept all the defaults till you get to the Fonts screen. Optionally change the 
 ##CUDA Samples Dependencies
 There are a few tricky dependencies for some of the dependencies in CUDA. These may only apply to the Samples, but for completeness' sake:
 
-`sudo apt-get install freeglut3-dev build-essential libxmu-dev libxi-dev`
+`sudo apt install freeglut3-dev build-essential libxmu-dev libxi-dev`
 
-`sudo apt-get install libc6:i386`
+`sudo apt install libc6:i386`
 
-`sudo apt-get install libgl1-mesa-glx-lts-trusty:i386`
+`sudo apt install libgl1-mesa-glx-lts-trusty:i386`
 
 
