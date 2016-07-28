@@ -68,13 +68,28 @@ It is impossible to over-estimate how important `--no-opengl-libs` is.  If you l
 
 The installer will provide a series of interactive prompts:
 
-- Accept the license
-- Yes to install the driver
+- **Accept** the license
+- **Yes** to install the driver
 - (OpenGL should not show up next. If it does, say NO.)
-- Yes to install the toolkit
+- **Yes** to install the toolkit
 - Default toolkit location is fine
-- Yes to symlink creation
-- Yes to samples
+- **Yes** to symlink creation
+- **Yes** to samples
 - Default samples location is fine
 
+#Verify video card is enumerated in /dev
+
+`ls /dev/nvidia*`
+
+#Fix for Optimus/Hybrid graphics (laptops)
+
+On portable machines with Hybrid/Optimus graphics, the above command will often fail. If it does, run these two commands:
+
+```
+sudo nvidia-smi
+sudo modprobe nvidia-uvm
+```
+The devices should now be present.
+
+#Environment Variables
 
