@@ -50,4 +50,31 @@ Now apply these changes to the RAM file system that is used as an intital root f
 
 Restart the computer using your favorite method.
 
-##CUDA Toolkit
+#CUDA Toolkit
+
+Download CUDA 7.5 from [https://developer.nvidia.com/cuda-downloads].
+
+Choose **Linux** > **x86_64** > **Ubuntu** > **14.04** > **runfile (local)**
+
+Press `Control-Alt-F1` to switch to the text console.  Now we'll stop the X server:
+
+<pre>
+sudo stop lightdm
+cd Downloads
+sudo sh cuda_7.5.18_linux.run <b>--no-opengl-libs</b>
+</pre>
+
+It is impossible to over-estimate how important `--no-opengl-libs` is.  If you leave this off, or mistype it, the easiest way to recover is to **re-install the operating system**.  So don't forget it...
+
+The installer will provide a series of interactive prompts:
+
+- Accept the license
+- Yes to install the driver
+- (OpenGL should not show up next. If it does, say NO.)
+- Yes to install the toolkit
+- Default toolkit location is fine
+- Yes to symlink creation
+- Yes to samples
+- Default samples location is fine
+
+
