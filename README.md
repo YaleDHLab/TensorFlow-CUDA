@@ -16,11 +16,11 @@ Accept all the defaults till you get to the Fonts screen. Optionally change the 
 ##CUDA Samples Dependencies
 There are a few tricky dependencies for some of the dependencies in CUDA. These may only apply to the Samples, but for completeness' sake:
 
-`sudo apt install freeglut3-dev build-essential libxmu-dev libxi-dev`
-
-`sudo apt install libc6:i386`
-
-`sudo apt install libgl1-mesa-glx-lts-trusty:i386`
+```
+sudo apt install freeglut3-dev build-essential libxmu-dev libxi-dev
+sudo apt install libc6:i386
+sudo apt install libgl1-mesa-glx-lts-trusty:i386
+```
 
 ##Python
 
@@ -36,12 +36,13 @@ The magic steps to avoid GUI lockout when using binary NVIDIA display drivers we
 We need to prevent the open, non-NVIDIA driver from contending control of hardware that the binary blob will now handle. Create a new file:
 
 `sudo nano /etc/modprobe.d/blacklist-nouveau.conf`
-`blacklist nouveau`
-`options nouveau modeset=0`
+Add two lines:
+```
+blacklist nouveau
+options nouveau modeset=0
+```
 
 Now apply these changes to the RAM file system that is used as an intital root file system:
 
 `sudo update-initramfs -u`
-
-
 
