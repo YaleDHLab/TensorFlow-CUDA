@@ -22,4 +22,26 @@ There are a few tricky dependencies for some of the dependencies in CUDA. These 
 
 `sudo apt install libgl1-mesa-glx-lts-trusty:i386`
 
+##Python
+
+`sudo apt install python-pip python-dev`
+
+#CUDA Toolkit
+
+The magic steps to avoid GUI lockout when using binary NVIDIA display drivers were cribbed form [this thread](https://devtalk.nvidia.com/default/topic/878117/-solved-titan-x-for-cuda-7-5-login-loop-error-ubuntu-14-04-/
+).
+
+##Blacklisting the non-NVIDIA driver
+
+We need to prevent the open, non-NVIDIA driver from contending control of hardware that the binary blob will now handle. Create a new file:
+
+`sudo nano /etc/modprobe.d/blacklist-nouveau.conf`
+`blacklist nouveau`
+`options nouveau modeset=0`
+
+Now apply these changes to the RAM file system that is used as an intital root file system:
+
+`sudo update-initramfs -u`
+
+
 
