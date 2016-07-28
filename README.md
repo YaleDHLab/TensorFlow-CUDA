@@ -77,11 +77,11 @@ The installer will provide a series of interactive prompts:
 - **Yes** to samples
 - Default samples location is fine
 
-#Verify video card is enumerated in /dev
+##Verify video card is enumerated in /dev
 
 `ls /dev/nvidia*`
 
-#Fix for Optimus/Hybrid graphics (laptops)
+##Fix for Optimus/Hybrid graphics (laptops)
 
 On portable machines with Hybrid/Optimus graphics, the above command will often fail. If it does, run these two commands:
 
