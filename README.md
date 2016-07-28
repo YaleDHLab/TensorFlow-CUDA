@@ -1,5 +1,5 @@
 # Base OS
-Start with Ubuntu [14.04 LTS](http://releases.ubuntu.com/14.04/).  Newer versions of Ubuntu have much more recent versions of GCC and other tools.  This requires a whole bunch of hacks to get TensorFlow and its constituent elements compiled correctly -- it's basically not worth it.
+Start with Ubuntu [14.04 LTS](http://releases.ubuntu.com/14.04/).  Newer releases have  more recent versions of GCC and other tools, which requires a whole bunch of hacks to get TensorFlow and its constituent elements compiled correctly -- it's basically not worth it.
 
 During installation, do NOT check the “Install this third-party software,” which will add an NVIDIA binary  driver. We want to use the one from the CUDA installer, so there’s no need to confuse things.
 
@@ -26,7 +26,7 @@ sudo apt install libgl1-mesa-glx-lts-trusty:i386
 
 `sudo apt install python-pip python-dev`
 
-#CUDA Toolkit
+#Prep for CUDA Toolkit's binary driver
 
 The magic steps to avoid GUI lockout when using binary NVIDIA display drivers were cribbed form [this thread](https://devtalk.nvidia.com/default/topic/878117/-solved-titan-x-for-cuda-7-5-login-loop-error-ubuntu-14-04-/
 ).
@@ -46,3 +46,8 @@ Now apply these changes to the RAM file system that is used as an intital root f
 
 `sudo update-initramfs -u`
 
+##Reboot
+
+Restart the computer using your favorite method.
+
+##CUDA Toolkit
