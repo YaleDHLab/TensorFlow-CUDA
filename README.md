@@ -54,7 +54,8 @@ Now apply these changes to the RAM file system that is used as an intital root f
 
 Download CUDA 7.5 from [https://developer.nvidia.com/cuda-downloads].
 
-Choose **Linux** > **x86_64** > **Ubuntu** > **14.04** > **run**
+
+Choose **Linux** > **x86_64** > **Ubuntu** > **14.04** > **runfile (local)**
 
 ##Reboot
 
@@ -66,6 +67,7 @@ Press `Control-Alt-F1` to switch to the text console.  Now we'll stop the X serv
 <pre>
 sudo stop lightdm
 cd Downloads
+./<cuda-archive-name> --extract=<your_fav_dir>
 sudo sh NVIDIA_Linux-x86<version>.run <b>--no-opengl-libs</b>
 </pre>
 
@@ -80,11 +82,6 @@ export PATH=/usr/local/cuda-7.5/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda-7.5/lib64:$LD_LIBRARY_PATH
 ```
 
-##Fix broken Unity (X server)
-Reboot machine via GUI. X will be broken.
-Hit Control-Alt-F1 to get console. Login.
-sudo apt-get remove --purge nvidia-*
-sudo apt-get remove --purge xserver-xorg-video-nouveau xserver-xorg-video-nv
 #CUDAnn
 
 [https://developer.nvidia.com/cudnn]
