@@ -50,20 +50,28 @@ Now apply these changes to the RAM file system that is used as an intital root f
 
 `sudo update-initramfs -u`
 
-##Reboot
-
-Restart the computer using your favorite method.
 #CUDA Toolkit
 
 Download CUDA 7.5 from [https://developer.nvidia.com/cuda-downloads].
 
-Choose **Linux** > **x86_64** > **Ubuntu** > **14.04** > **deb (local)**
+Choose **Linux** > **x86_64** > **Ubuntu** > **14.04** > **run**
 
-```
- sudo dpkg -i <filename>
- sudo apt update
- sudo apt install cuda
-```
+##Reboot
+
+Restart the computer using your favorite method.
+
+
+Press `Control-Alt-F1` to switch to the text console.  Now we'll stop the X server:
+
+<pre>
+sudo stop lightdm
+cd Downloads
+sudo sh NVIDIA_Linux-x86<version>.run <b>--no-opengl-libs</b>
+</pre>
+
+##Reboot
+Continue to install CUDA and the CUDA Samples.
+
 ##Post-installation
 Add to `.bashrc`:
 
