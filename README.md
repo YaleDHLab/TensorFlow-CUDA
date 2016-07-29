@@ -26,70 +26,75 @@ sudo apt install libgl1-mesa-glx-lts-trusty:i386
 
 `sudo apt install python-pip python-dev`
 
-#Prep for CUDA Toolkit's binary driver
-
-The magic steps to avoid GUI lockout when using binary NVIDIA display drivers were cribbed form [this thread](https://devtalk.nvidia.com/default/topic/878117/-solved-titan-x-for-cuda-7-5-login-loop-error-ubuntu-14-04-/
-).
-
-##Blacklisting the non-NVIDIA driver
-
-We need to prevent the open, non-NVIDIA driver from contending control of hardware that the binary blob will now handle. Create a new file:
-
-`sudo nano /etc/modprobe.d/blacklist-nouveau.conf`
-Add two lines:
-```
-blacklist nouveau
-options nouveau modeset=0
-```
-
-Now apply these changes to the RAM file system that is used as an intital root file system:
-
-`sudo update-initramfs -u`
-
-##Reboot
-
-Restart the computer using your favorite method.
 
 #CUDA Toolkit
 
 Download CUDA 7.5 from [https://developer.nvidia.com/cuda-downloads].
 
-Choose **Linux** > **x86_64** > **Ubuntu** > **14.04** > **runfile (local)**
-
-Press `Control-Alt-F1` to switch to the text console.  Now we'll stop the X server:
-
-<pre>
-sudo stop lightdm
-cd Downloads
-sudo sh cuda_7.5.18_linux.run <b>--no-opengl-libs</b>
-</pre>
-
-It is impossible to over-estimate how important `--no-opengl-libs` is.  If you leave this off, or mistype it, the easiest way to recover is to **re-install the operating system**.  So don't forget it...
-
-The installer will provide a series of interactive prompts:
-
-- **Accept** the license
-- **Yes** to install the driver
-- (OpenGL should not show up next. If it does, say NO.)
-- **Yes** to install the toolkit
-- Default toolkit location is fine
-- **Yes** to symlink creation
-- **Yes** to samples
-- Default samples location is fine
-
-##Verify video card is enumerated in /dev
-
-`ls /dev/nvidia*`
-
-##Fix for Optimus/Hybrid graphics (laptops)
-
-On portable machines with Hybrid/Optimus graphics, the above command will often fail. If it does, run these two commands:
+Choose **Linux** > **x86_64** > **Ubuntu** > **14.04** > **deb (local)**
 
 ```
-sudo nvidia-smi
-sudo modprobe nvidia-uvm
+ sudo dpkg -i <filename>
+ sudo apt update
+ sudo apt install cuda
 ```
-The devices should now be present.
 
-#Environment Variables
+#CUDAnn
 
+[https://developer.nvidia.com/cudnn]
+
+Make sure you get version 4.
+Move the files into `/usr/local/cuda/include` and `/usr/local/cuda/lib64`.
+Set permissions correctly.
+`sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*`
+
+#TensorFlow
+Existing binary builds of TensorFlow have very bad memory management when run on GPUs (which is the whole point here.) So we'll need to build TensorFlow from source.
+
+
+##Bazel
+First we'll need JDK8:
+###JDK8
+```
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+```
+###Bazel package source
+```
+echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
+curl https://storage.googleapis.com/bazel-apt/doc/apt-key.pub.gpg | sudo apt-key add -
+```
+###Install bazel
+The latest installer should be [here](https://github.com/bazelbuild/bazel/releases), ie `bazel-0.3.1-installer-linux-x86_64.sh`.
+
+```
+chmod +x bazel-0.3.1-installer-linux-x86_64.sh
+./bazel-0.3.1-installer-linux-x86_64.sh --user
+```
+Remember to add bazel to your path as per instructions.
+
+###Bazel-specific python dependencies
+
+`sudo apt-get install python-numpy swig python-dev python-wheel`
+
+##Compiling TensorFlow
+
+```
+git clone https://github.com/tensorflow/tensorflow
+cd tensorflow
+./configure
+```
+Default location of pyton is ok.
+No to Google Cloud Platform
+YES to GUP
+default gcc
+Declare Cuda to be 7.5
+declare CUDNN to be 4.
+
+##Compilation
+`bazel build -c opt --config=cuda //tensorflow/cc:tutorials_example_trainer`
+NB if your path is not configured, `/home/pleonard/bin/bazel build`...
+
+#Monitor GPU usage
+`watch -n 1 nvidia-smi`
