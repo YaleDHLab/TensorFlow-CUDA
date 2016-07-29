@@ -38,7 +38,13 @@ Choose **Linux** > **x86_64** > **Ubuntu** > **14.04** > **deb (local)**
  sudo apt update
  sudo apt install cuda
 ```
+##Post-installation
+Add to `.bashrc`:
 
+```
+export PATH=/usr/local/cuda-7.5/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-7.5/lib64:$LD_LIBRARY_PATH
+```
 #CUDAnn
 
 [https://developer.nvidia.com/cudnn]
