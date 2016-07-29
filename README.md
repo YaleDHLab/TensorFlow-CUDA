@@ -1,5 +1,14 @@
+#BIOS
+Configure for Discrete, not Hybrid GPU.
+
 # Base OS
 Start with Ubuntu [14.04 LTS](http://releases.ubuntu.com/14.04/).  Newer releases have  more recent versions of GCC and other tools, which requires a whole bunch of hacks to get TensorFlow and its constituent elements compiled correctly -- it's basically not worth it.
+
+##Edit GRUB install params
+On first boot from the installer, highlight the "Install Ubuntu" line but hit `E` to edit the command.
+Suffix `nouveau.modeset=0` to the very end of the line that begins `linux`.
+Press `F10` to comtinue.
+
 
 During installation, do NOT check the “Install this third-party software,” which will add an NVIDIA binary  driver. We want to use the one from the CUDA installer, so there’s no need to confuse things.
 
@@ -45,6 +54,12 @@ Add to `.bashrc`:
 export PATH=/usr/local/cuda-7.5/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda-7.5/lib64:$LD_LIBRARY_PATH
 ```
+
+##Fix broken Unity (X server)
+Reboot machine via GUI. X will be broken.
+Hit Control-Alt-F1 to get console. Login.
+sudo apt-get remove --purge nvidia-*
+sudo apt-get remove --purge xserver-xorg-video-nouveau xserver-xorg-video-nv
 #CUDAnn
 
 [https://developer.nvidia.com/cudnn]
