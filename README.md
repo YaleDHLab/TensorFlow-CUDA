@@ -35,7 +35,24 @@ sudo apt install libgl1-mesa-glx-lts-trusty:i386
 
 `sudo apt install python-pip python-dev`
 
+##Blacklisting the non-NVIDIA driver
 
+We need to prevent the open, non-NVIDIA driver from contending control of hardware that the binary blob will now handle. Create a new file:
+
+`sudo nano /etc/modprobe.d/blacklist-nouveau.conf`
+Add two lines:
+```
+blacklist nouveau
+options nouveau modeset=0
+```
+
+Now apply these changes to the RAM file system that is used as an intital root file system:
+
+`sudo update-initramfs -u`
+
+##Reboot
+
+Restart the computer using your favorite method.
 #CUDA Toolkit
 
 Download CUDA 7.5 from [https://developer.nvidia.com/cuda-downloads].
