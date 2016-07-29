@@ -5,7 +5,7 @@ During installation, do NOT check the “Install this third-party software,” w
 
 # Post-installation OS setup
 
-`sudo apt install tcsh`
+`sudo apt install zlib`
 
 ##For HiDPI/Retina screens
 
