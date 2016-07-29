@@ -96,5 +96,8 @@ declare CUDNN to be 4.
 `bazel build -c opt --config=cuda //tensorflow/cc:tutorials_example_trainer`
 NB if your path is not configured, `/home/pleonard/bin/bazel build`...
 
+###Compliation time
+24 minutes on a octacore XEON with Samsung 950 SSD
+
 #Monitor GPU usage
 `watch -n 1 nvidia-smi`
