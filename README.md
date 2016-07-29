@@ -64,12 +64,12 @@ Restart the computer using your favorite method.
 
 Press `Control-Alt-F1` to switch to the text console.  Now we'll stop the X server:
 
-<pre>
+```
 sudo stop lightdm
 cd Downloads
-./<cuda-archive-name> --extract=<your_fav_dir>
-sudo sh NVIDIA_Linux-x86<version>.run <b>--no-opengl-libs</b>
-</pre>
+./(cuda-archive-name) --extract=<your_fav_dir>
+sudo sh NVIDIA_Linux-x86<version>.run --no-opengl-libs
+```
 
 ##Reboot
 Continue to install CUDA and the CUDA Samples.
