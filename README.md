@@ -1,3 +1,6 @@
+# Note: This repository has been archived
+These instructions were developed under a previous phase of the Yale Digital Humanities Lab. Now a part of Yale Library’s Computational Methods and Data department, the Lab no longer includes these instructions in its scope of work. As such, they will receive no further updates.
+
 # Base OS
 Start with Ubuntu [14.04 LTS](http://releases.ubuntu.com/14.04/).  Newer releases have  more recent versions of GCC and other tools, which requires a whole bunch of hacks to get TensorFlow and its constituent elements compiled correctly -- it's basically not worth it.
 
